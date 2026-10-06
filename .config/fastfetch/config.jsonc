@@ -1,0 +1,124 @@
+{
+    "$schema": "https://github.com/fastfetch-cli/fastfetch/raw/dev/doc/json_schema.json",
+    "logo": {
+        "padding": {
+            "top": 2
+        }
+    },
+    "display": {
+        "separator": " -> "
+    },
+    "modules": [
+        "title",
+        "separator",
+        {
+            "type": "os",
+            "key": " {icon} OS",
+            "keyColor": "yellow"
+        },
+	{
+            "type": "kernel",
+            "key": " ├{icon}",
+            "keyColor": "yellow"
+        },	
+        {
+            "type": "packages",
+            "key": " ├{icon}",
+            "keyColor": "yellow"
+        },
+        {
+            "type": "shell",
+            "key": " ├",
+            "keyColor": "yellow"
+        },
+        {
+   	    "type": "disk",
+  	    "folders": "/",
+  	    "format": "{days} days",
+  	    "key": " └",
+  	    "keyColor": "yellow"
+        },
+        "break",
+        {
+            "type": "wm",
+            "key": "  DE/WM",
+            "keyColor": "blue"
+        },
+        {
+            "type": "lm",
+            "key": " ├{icon}",
+            "keyColor": "blue"
+        },
+        {
+            "type": "wmtheme",
+            "key": " ├{icon}",
+            "keyColor": "blue"
+        },
+        {
+            "type": "icons",
+            "key": " ├{icon}",
+            "keyColor": "blue"
+        },
+        {
+            "type": "terminal",
+            "key": " ├{icon}",
+            "keyColor": "blue"
+        },
+        {
+            "type": "wallpaper",
+            "key": " └󰸉",
+            "keyColor": "blue"
+        },
+        "break",
+        {
+            "type": "host",
+            "key": " 󰌢 PC",
+            "keyColor": "green"
+        },
+        {
+            "type": "cpu",
+            "key": " ├{icon}",
+            "keyColor": "green",
+            "format": "{cores-logical} x {name}"
+        },
+        {
+            "type": "gpu",
+            "key": " ├{icon}",
+            "keyColor": "green"
+        },
+        {
+            "type": "disk",
+            "key": " ├{icon}",
+            "keyColor": "green"
+        },
+        {
+            "type": "memory",
+            "key": " ├{icon}",
+            "keyColor": "green"
+        },
+        {
+            "type": "swap",
+            "key": " ├{icon}",
+            "keyColor": "green"
+        },
+        {
+            "type": "uptime",
+            "key": " ├{icon}",
+            "keyColor": "green"
+        },
+	{
+    	    "type": "localip",
+    	    "key": " ├󱦂",
+    	    "keyColor": "green"
+	},
+        {
+            "type": "display",
+            "key": " └󰍹",
+            "keyColor": "green"
+        },
+
+        "break",
+        "colors"
+
+    ]
+}
