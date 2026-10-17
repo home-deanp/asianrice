@@ -24,7 +24,9 @@ configuration {
     me-select-entry: "";
     me-accept-entry: "!MousePrimary"; 
     kb-cancel: "MousePrimary";
+    monitor: "DP-1";
 }
+
 
 listview {
     columns: 1;
