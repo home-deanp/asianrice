@@ -20,6 +20,7 @@
 
   "modules-right": [
     "tray",
+    "custom/notification",
     "network",
     "custom/brightness",
     "pulseaudio",
@@ -84,6 +85,17 @@
     "spacing": 8
   },
 
+"custom/notification": {
+    "exec": "~/.config/waybar/scripts/mako-status.py",
+    "return-type": "json",
+    "interval": 2,
+    "signal": 8,
+    "tooltip": true,
+    "on-click": "makoctl mode | grep -q do-not-disturb && makoctl mode -r do-not-disturb || makoctl mode -a do-not-disturb; pkill -RTMIN+8 waybar",
+    "on-click-right": "makoctl dismiss -a; pkill -RTMIN+8 waybar",
+    "on-click-middle": "makoctl restore"
+},
+
   "network": {
     "format-wifi": "\uf1eb {essid}",
     "format-ethernet": "\uf0ac wired",
@@ -93,14 +105,15 @@
     "interval": 5,
     "on-click": "nm-connection-editor"
 },
-  "custom/brightness": {
-  "exec": "DBUS_SESSION_BUS_ADDRESS=unix:path=/run/user/$(id -u)/bus busctl --user get-property rs.wl-gammarelay / rs.wl.gammarelay Brightness | awk '{print int($2*100+0.5)}'",
-  "format": "\udb80\udcdf {}%",
-  "interval": 2,
-  "signal": 9,
-  "on-scroll-up": "~/.config/waybar/scripts/brightness.sh up",
-  "on-scroll-down": "~/.config/waybar/scripts/brightness.sh down",
-  "tooltip": true 
+"custom/notification": {
+    "exec": "~/.config/waybar/scripts/mako-status.py",
+    "return-type": "json",
+    "interval": 2,
+    "signal": 8,
+    "tooltip": true,
+    "on-click": "pgrep -x rofi && pkill -x rofi || ~/.config/waybar/scripts/notif-center.py",
+    "on-click-right": "makoctl mode | grep -q do-not-disturb && makoctl mode -r do-not-disturb || makoctl mode -a do-not-disturb; pkill -RTMIN+8 waybar",
+    "on-click-middle": "makoctl dismiss -a; pkill -RTMIN+8 waybar"
 },
 
   "pulseaudio": {
