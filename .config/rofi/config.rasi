@@ -10,7 +10,7 @@
     hl-color: #3B5283FF;
     hlt-color: #000000FF;
     alt-color: #111111FF;
-    wbg-color: #000000CC;
+    wbg-color: #000000E6;
     w-border: 2px solid;
     w-border-color: #3B5283; /* Updated border color */
     w-padding: 12px;
