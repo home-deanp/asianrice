@@ -1,0 +1,117 @@
+{
+  "layer": "top",
+  "position": "top",
+  "height": 29,
+  "spacing": 8,
+
+  "modules-left": [
+    "custom/arch",
+    "ext/workspaces",
+    "custom/window"
+  ],
+
+  "modules-center": [
+    "custom/cpu",
+    "custom/sep#1",
+    "memory",
+    "custom/sep#2",
+    "custom/gpu"
+  ],
+
+  "modules-right": [
+    "tray",
+    "network",
+    "custom/brightness",
+    "pulseaudio",
+    "clock"
+  ],
+
+  // ---------- left ----------
+  "custom/arch": {
+    "format": "\uf303",
+    "tooltip-format": "i use arch btw",
+    "tooltip": true
+  },
+
+  "ext/workspaces": {
+    "format": "{name}",
+    "ignore-hidden": true,
+    "on-click": "activate",
+    "on-click-right": "deactivate",
+    "sort-by-id": true
+  },
+
+  "custom/window": {
+    "exec": "~/.config/waybar/scripts/window.sh",
+    "interval": 1,
+    "max-length": 50,
+    "escape": true,
+    "tooltip": true
+  },
+
+  // ---------- center ----------
+  "custom/cpu": {
+    "exec": "~/.config/waybar/scripts/hw.sh cpu",
+    "interval": 2,
+    "tooltip": true 
+  },
+
+  "custom/sep#1": {
+    "format": "│",
+    "tooltip": false
+  },
+
+  "memory": {
+    "format": "RAM {used:0.1f}GB/{total:0.1f}GB",
+    "interval": 3,
+    "tooltip": true
+  },
+
+  "custom/sep#2": {
+    "format": "│",
+    "tooltip": false
+  },
+
+  "custom/gpu": {
+    "exec": "~/.config/waybar/scripts/hw.sh gpu",
+    "interval": 2,
+    "tooltip": true 
+  },
+
+  // ---------- right ----------
+  "tray": {
+    "icon-size": 16,
+    "spacing": 8
+  },
+
+  "network": {
+    "format-wifi": "\uf1eb {essid}",
+    "format-ethernet": "\uf0ac wired",
+    "format-disconnected": "\uf071 offline",
+    "tooltip-format-wifi": "{essid} ({signalStrength}%)\n{ipaddr}",
+    "tooltip-format-ethernet": "{ifname}\n{ipaddr}",
+    "interval": 5,
+    "on-click": "nm-connection-editor"
+},
+  "custom/brightness": {
+  "exec": "DBUS_SESSION_BUS_ADDRESS=unix:path=/run/user/$(id -u)/bus busctl --user get-property rs.wl-gammarelay / rs.wl.gammarelay Brightness | awk '{print int($2*100+0.5)}'",
+  "format": "\udb80\udcdf {}%",
+  "interval": 2,
+  "signal": 9,
+  "on-scroll-up": "~/.config/waybar/scripts/brightness.sh up",
+  "on-scroll-down": "~/.config/waybar/scripts/brightness.sh down",
+  "tooltip": true 
+},
+
+  "pulseaudio": {
+    "format": "\uf028 {volume}%",
+    "format-muted": "\uf026 muted",
+    "scroll-step": 5,
+    "on-click": "pavucontrol"
+  },
+
+  "clock": {
+    "format": "\uf017 {:%I:%M %p}",
+    "tooltip-format": "{:%A, %d %B %Y}"
+  }
+}
