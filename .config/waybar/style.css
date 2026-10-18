@@ -76,6 +76,20 @@ window#waybar {
 #custom-gpu { color: #cba6f7; }
 
 /* right */
+
+#custom-notification {
+    font-family: "Symbols Nerd Font", "Figtree";
+    font-size: 16px;
+    margin-right: 6px;
+    min-width: 20px;
+}
+#custom-notification.active {
+    color: #3B5283;
+}
+#custom-notification.dnd {
+    color: #888888;
+}
+
 #network      { 
    color: #89dceb; 
    font-size: 14px;
