@@ -1,0 +1,110 @@
+* {
+  font-family: "JetBrainsMono Nerd Font", "JetBrainsMono NF", "JetBrains Mono", "Symbols Nerd Font", monospace;
+  font-size: 13px;
+  border: none;
+  border-radius: 0 0 10px 10px;
+  min-height: 0;
+}
+
+window#waybar {
+  background: rgba(0, 0, 0, 0.9);
+  color: #cdd6f4;
+}
+
+/* shared module look */
+#custom-arch,
+#workspaces,
+#window,
+#custom-cpu,
+#memory,
+#custom-gpu,
+#tray,
+#network,
+#pulseaudio,
+#backlight,
+#clock {
+  padding: 0 8px;
+  background: transparent;
+}
+
+/* arch logo */
+#custom-arch {
+  color: #89b4fa;
+  font-size: 18px;
+  padding-left: 14px;
+  padding-right: 6px;
+}
+
+/* mango workspaces */
+#workspaces button {
+  padding: 0 7px;
+  color: #6c7086;
+  background: transparent;
+  border-radius: 6px;
+}
+  #workspaces button label {
+    font-size: 15px;
+  }
+#workspaces button:hover {
+  background: rgba(205, 214, 244, 0.1);
+  color: #cdd6f4;
+}
+
+#workspaces button.active,
+#workspaces button.focused {
+  color: #ffffff;
+}
+
+#workspaces button.urgent {
+  color: #f38ba8;
+}
+
+/* focused app */
+#custom-window {
+  font-size: 16px;
+  color: #ffffff;
+}
+
+/* center */
+#custom-sep {
+  color: #45475a;
+  padding: 0 2px;
+}
+
+#custom-cpu { color: #f9e2af; }
+#memory     { color: #a6e3a1; }
+#custom-gpu { color: #cba6f7; }
+
+/* right */
+#network      { 
+   color: #89dceb; 
+   font-size: 14px;
+}
+#network.disconnected { 
+  color: #f38ba8; 
+  font-size: 14px;
+}
+#pulseaudio   { 
+  color: #fab387; 
+  font-size: 14px;
+}
+#pulseaudio.muted { 
+  color: #6c7086; 
+  font-size: 16px;
+}
+#custom-brightness {
+  padding: 0 8px;
+  font-size: 14px;
+  color: #f9e2af;
+}
+#clock {
+  font-size: 15px;
+  color: #ffffff;
+  padding-right: 14px;
+}
+
+tooltip {
+  background: #080707;
+  border: 1px solid #45475a;
+  border-radius: 6px;
+}
