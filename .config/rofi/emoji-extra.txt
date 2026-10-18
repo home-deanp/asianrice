@@ -1,0 +1,15 @@
+# Extra search words. One emoji per line: the emoji, then words to find it by.
+# Lines starting with # are ignored. The picker rebuilds its list when this file changes.
+🥺 sparkly eyes sparkle shiny eyes puppy eyes uwu cute begging please
+🥹 sparkly eyes teary tears happy cry crying touched
+🤩 sparkly eyes sparkle starry eyes wow amazed excited
+✨ sparkly sparkle sparkles glitter shiny magic
+💖 sparkly heart sparkle pink heart love
+😭 crying tears sobbing bawling sad cry
+😢 crying tears sad cry teardrop
+🥲 crying tears smiling happy sad bittersweet
+😂 laughing crying tears joy lol lmao
+😿 crying cat tears sad cry
+💔 broken heart sad heartbreak crying
+🫠 melting face awkward embarrassed
+🙏 please thank you pray hope begging
