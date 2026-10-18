@@ -13,7 +13,7 @@ default-timeout=5000
 ignore-timeout=1
 anchor=top-right
 layer=overlay
-output=DP-2
+#output=DP-2
 
 [urgency=low]
 default-timeout=3000
