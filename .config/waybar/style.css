@@ -116,9 +116,17 @@ window#waybar {
   color: #ffffff;
   padding-right: 14px;
 }
+/* date, just before the time */
+#clock.date {
+  color: #ffffff;
+  padding-right: 0;
+}
 
 tooltip {
   background: #080707;
   border: 1px solid #45475a;
   border-radius: 6px;
+}
+tooltip label {
+  padding: 4px 8px;
 }
