@@ -24,6 +24,7 @@
     "network",
     "custom/brightness",
     "pulseaudio",
+    "clock#date",
     "clock"
   ],
 
@@ -85,17 +86,6 @@
     "spacing": 8
   },
 
-"custom/notification": {
-    "exec": "~/.config/waybar/scripts/mako-status.py",
-    "return-type": "json",
-    "interval": 2,
-    "signal": 8,
-    "tooltip": true,
-    "on-click": "makoctl mode | grep -q do-not-disturb && makoctl mode -r do-not-disturb || makoctl mode -a do-not-disturb; pkill -RTMIN+8 waybar",
-    "on-click-right": "makoctl dismiss -a; pkill -RTMIN+8 waybar",
-    "on-click-middle": "makoctl restore"
-},
-
   "network": {
     "format-wifi": "\uf1eb {essid}",
     "format-ethernet": "\uf0ac wired",
@@ -105,6 +95,17 @@
     "interval": 5,
     "on-click": "nm-connection-editor"
 },
+
+"custom/brightness": {
+  "exec": "DBUS_SESSION_BUS_ADDRESS=unix:path=/run/user/$(id -u)/bus busctl --user get-property rs.wl-gammarelay / rs.wl.gammarelay Brightness | awk '{print int($2*100+0.5)}'",
+  "format": "\udb81\udda8 {}%",
+  "interval": 2,
+  "signal": 9,
+  "on-scroll-up": "~/.config/waybar/scripts/brightness.sh up",
+  "on-scroll-down": "~/.config/waybar/scripts/brightness.sh down",
+  "tooltip": false
+},
+
 "custom/notification": {
     "exec": "~/.config/waybar/scripts/mako-status.py",
     "return-type": "json",
@@ -123,8 +124,34 @@
     "on-click": "pavucontrol"
   },
 
+  // date: hover for a month calendar (right-click toggles month/year, scroll changes month)
+  "clock#date": {
+    "format": "{:%Y-%m-%d}",
+    "tooltip-format": "<tt><small>{calendar}</small></tt>",
+    "calendar": {
+      "mode": "month",
+      "mode-mon-col": 3,
+      "weeks-pos": "right",
+      "on-scroll": 1,
+      "format": {
+        "months": "<span color='#b59aeb'><b>{}</b></span>",
+        "days": "<span color='#cdd6f4'>{}</span>",
+        "weeks": "<span color='#f38ba8'>W{}</span>",
+        "weekdays": "<span color='#a6adc8'><b>{}</b></span>",
+        "today": "<span color='#f9e2af'><b><u>{}</u></b></span>"
+      }
+    },
+    "actions": {
+      "on-click-right": "mode",
+      "on-scroll-up": "shift_up",
+      "on-scroll-down": "shift_down"
+    }
+  },
+
+  // time: hover for the time with seconds (interval 1 keeps the seconds ticking in the tooltip)
   "clock": {
-    "format": "\uf017 {:%I:%M %p}",
-    "tooltip-format": "{:%A, %d %B %Y}"
+    "format": "{:%I:%M %p}",
+    "interval": 1,
+    "tooltip-format": "{:%I:%M:%S %p}"
   }
 }
