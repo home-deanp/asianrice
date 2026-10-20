@@ -1,0 +1,12 @@
+# 15 minutes: lock the session
+timeout 900 'swaylock -f -c 000000'
+
+# 15 minutes: turn the screens off (and back on when resumed)
+timeout 900 'wlopm --off "*"' resume 'wlopm --on "*"'
+
+# 1 hour: suspend (sleep)
+timeout 3600 'systemctl suspend'
+
+# Lock before system sleep or manual lock event
+before-sleep 'swaylock -f -c 000000'
+lock 'swaylock -f -c 000000'
