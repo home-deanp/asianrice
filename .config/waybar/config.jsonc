@@ -127,7 +127,7 @@
   // date: hover for a month calendar (right-click toggles month/year, scroll changes month)
   "clock#date": {
     "format": "{:%Y-%m-%d}",
-    "tooltip-format": "<tt><small>{calendar}</small></tt>",
+    "tooltip-format": "<tt>{calendar}</tt>",
     "calendar": {
       "mode": "month",
       "mode-mon-col": 3,
