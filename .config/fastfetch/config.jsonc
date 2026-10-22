@@ -14,29 +14,29 @@
         {
             "type": "os",
             "key": " {icon} OS",
-            "keyColor": "yellow"
+            "keyColor": "blue"
         },
 	{
             "type": "kernel",
             "key": " ├{icon}",
-            "keyColor": "yellow"
+            "keyColor": "blue"
         },	
         {
             "type": "packages",
             "key": " ├{icon}",
-            "keyColor": "yellow"
+            "keyColor": "blue"
         },
         {
             "type": "shell",
             "key": " ├",
-            "keyColor": "yellow"
+            "keyColor": "blue"
         },
         {
    	    "type": "disk",
   	    "folders": "/",
   	    "format": "{days} days",
   	    "key": " └",
-  	    "keyColor": "yellow"
+  	    "keyColor": "blue"
         },
         "break",
         {
@@ -73,48 +73,48 @@
         {
             "type": "host",
             "key": " 󰌢 PC",
-            "keyColor": "green"
+            "keyColor": "blue"
         },
         {
             "type": "cpu",
             "key": " ├{icon}",
-            "keyColor": "green",
+            "keyColor": "blue",
             "format": "{cores-logical} x {name}"
         },
         {
             "type": "gpu",
             "key": " ├{icon}",
-            "keyColor": "green"
+            "keyColor": "blue"
         },
         {
             "type": "disk",
             "key": " ├{icon}",
-            "keyColor": "green"
+            "keyColor": "blue"
         },
         {
             "type": "memory",
             "key": " ├{icon}",
-            "keyColor": "green"
+            "keyColor": "blue"
         },
         {
             "type": "swap",
             "key": " ├{icon}",
-            "keyColor": "green"
+            "keyColor": "blue"
         },
         {
             "type": "uptime",
             "key": " ├{icon}",
-            "keyColor": "green"
+            "keyColor": "blue"
         },
 	{
     	    "type": "localip",
     	    "key": " ├󱦂",
-    	    "keyColor": "green"
+    	    "keyColor": "blue"
 	},
         {
             "type": "display",
             "key": " └󰍹",
-            "keyColor": "green"
+            "keyColor": "blue"
         },
 
         "break",
