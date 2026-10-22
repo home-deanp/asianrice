@@ -9,7 +9,7 @@ waybar awww mako swayidle swaylock kitty thunar btop rofi wireplumber pavucontro
 
 aur:
 
-nvibrant wl-gammarelay-rs xfce-polkit 
+nvibrant wl-gammarelay-rs xfce-polkit wayfreeze-git
 
 then after installing just git clone this repository
 then cp -rf .config/* ~/.config/
