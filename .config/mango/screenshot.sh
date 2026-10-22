@@ -25,8 +25,14 @@ for tool in grim slurp wl-copy; do
 done
 
 # Region picker styled like your theme: dimmed screen, blue outline
+# After you let go, slurp's overlay takes a moment to disappear. If grim fires before that, the coloured
+# outline and tint end up in the screenshot, so wait a moment (raise SETTLE if you still see a tint).
+SETTLE=0.3
 pick_area() {
-    slurp -d -b '#00000066' -c '#3B5283FF' -s '#3B528333' -w 2
+    local g
+    g=$(slurp -d -b '#00000066' -c '#3B5283FF' -s '#3B528333' -w 2) || return 1
+    sleep "$SETTLE"
+    printf '%s\n' "$g"
 }
 
 # Swappy settings: close after you copy or save, save into the Screenshots folder, no toolbar.
