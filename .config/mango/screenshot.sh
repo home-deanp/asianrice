@@ -29,8 +29,10 @@ done
 # outline and tint end up in the screenshot, so wait a moment (raise SETTLE if you still see a tint).
 SETTLE=0.3
 pick_area() {
-    local g
-    g=$(slurp -d -b '#00000066' -c '#3B5283FF' -s '#3B528333' -w 2) || return 1
+    local g accent
+    accent=$(cat "${XDG_CACHE_HOME:-$HOME/.cache}/theme/accent" 2>/dev/null)    # the colour theme.sh last picked
+    accent=${accent:-3B5283}
+    g=$(slurp -d -b '#00000066' -c "#${accent}FF" -s "#${accent}33" -w 2) || return 1
     sleep "$SETTLE"
     printf '%s\n' "$g"
 }
