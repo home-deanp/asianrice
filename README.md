@@ -13,3 +13,6 @@ nvibrant wl-gammarelay-rs
 
 then after installing just git clone this repository
 then cp -rf .config/* ~/.config/
+
+make thunar complete:
+sudo pacman -S gvfs gvfs-mtp gvfs-afc udisks2 thunar-volman tumbler ffmpegthumbnailer poppler-glib libgsf webp-pixbuf-loader thunar-archive-plugin thunar-media-tags-plugin catfish file-roller polkit-gnome
