@@ -10,3 +10,6 @@ waybar awww mako swayidle swaylock kitty thunar btop rofi wireplumber wl-clipboa
 aur:
 
 nvibrant wl-gammarelay-rs 
+
+then after installing just git clone this repository
+then cp -rf .config/* ~/.config/
