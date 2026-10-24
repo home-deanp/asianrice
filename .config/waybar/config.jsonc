@@ -24,6 +24,7 @@
     "network",
     "custom/brightness",
     "pulseaudio",
+    "custom/battery",
     "clock#date",
     "clock"
   ],
@@ -116,6 +117,14 @@
     "on-click-right": "makoctl mode | grep -q do-not-disturb && makoctl mode -r do-not-disturb || makoctl mode -a do-not-disturb; pkill -RTMIN+8 waybar",
     "on-click-middle": "makoctl dismiss -a; pkill -RTMIN+8 waybar"
 },
+
+  // battery: laptop + any wireless mouse / keyboard / headset that reports one. Hides itself on a PC with none.
+  "custom/battery": {
+    "exec": "~/.config/waybar/scripts/battery.py",
+    "return-type": "json",
+    "interval": 30,
+    "tooltip": true
+  },
 
   "pulseaudio": {
     "format": "\uf028 {volume}%",
