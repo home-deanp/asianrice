@@ -3,6 +3,13 @@ if status is-interactive
     function fish_mode_prompt
     end
 
+    function fish_user_key_bindings
+        # Bind Ctrl+R to history search in Insert mode
+        bind -M insert \cr history-pager
+        # Bind Ctrl+R to history search in Normal mode
+        bind -M default \cr history-pager
+    end
+
     set -gx EDITOR nvim
     set fish_greeting
 
