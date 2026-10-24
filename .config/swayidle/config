@@ -1,12 +1,12 @@
-# 15 minutes: lock the session
-timeout 900 'swaylock -f -c 000000'
+# 10 minutes: Lock the screen (triggers the 'lock' rule below)
+timeout 600 'loginctl lock-session'
 
-# 15 minutes: turn the screens off (and back on when resumed)
+# 15 minutes: Turn off displays
 timeout 900 'wlopm --off "*"' resume 'wlopm --on "*"'
 
-# 1 hour: suspend (sleep)
+# 1 hour: Suspend system
 timeout 3600 'systemctl suspend'
 
-# Lock before system sleep or manual lock event
-before-sleep 'swaylock -f -c 000000'
+# Lock events and pre-sleep rules
 lock 'swaylock -f -c 000000'
+before-sleep 'loginctl lock-session'
