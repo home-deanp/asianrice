@@ -2,6 +2,8 @@ This is my **configs** for my **arch linux**
 
 chmod +x "path" in the scripts in the waybar to get them working aswell as rofi clipboard and calc and emoji (usually anything with an sh and py)
 
+chmod +x ~/.config/mango/*.sh ~/.config/rofi/*.sh ~/.config/waybar/scripts/*
+
 **pacman:**
 
 waybar awww mako swayidle swaylock kitty thunar btop rofi wireplumber pavucontrol wl-clipboard wl-clip-persist cliphist noto-fonts-emoji xdg-desktop-portal-wlr grim slurp swappy python-pillow imagemagick wlopm xorg-xhost 
