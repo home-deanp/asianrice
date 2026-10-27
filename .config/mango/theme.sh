@@ -406,6 +406,7 @@ repair_colours() {
         [ -f "$f" ] && sed -i -E "s/^([[:space:]]*b-color:[[:space:]]*)#[0-9A-Fa-f]{6}FF;/\1#000000FF;/; s/^([[:space:]]*wbg-color:[[:space:]]*)#[0-9A-Fa-f]{6}E6;/\1#000000E6;/" "$f"
     done
     [ -f "$CFG/mako/config" ] && sed -i -E "s/^(background-color=)#[0-9A-Fa-f]{6}E6/\1#000000E6/" "$CFG/mako/config"
+    [ -f "$CFG/mango/screenshot.sh" ] && sed -i -E "s/(slurp -d -b ')#[0-9A-Fa-f]{6}66'/\1#00000066'/" "$CFG/mango/screenshot.sh"
     if [ -f "$CFG/swaylock/config" ]; then
         sed -i -E "s/^(color=)[0-9A-Fa-f]{6}$/\1000000/; s/^(inside(-clear|-ver|-wrong)?-color=)[0-9A-Fa-f]{6}99/\100000099/" "$CFG/swaylock/config"
         sed -i -E "s/^((line|line-clear|line-ver|line-wrong|separator)-color=)[0-9A-Fa-f]{8}/\100000000/; s/^(ring-wrong-color=)[0-9A-Fa-f]{6}/\1E5484D/; s/^(bs-hl-color=)[0-9A-Fa-f]{6}/\1E5484D/" "$CFG/swaylock/config"
