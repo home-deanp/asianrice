@@ -20,6 +20,7 @@ sudo pacman -S gvfs gvfs-mtp gvfs-afc udisks2 thunar-volman tumbler ffmpegthumbn
 nwg-look  (to change thunar to dark mode)
 
 **hide foot server and foot client keeping only foot**
+
 mkdir -p ~/.local/share/applications
 cp /usr/share/applications/footclient.desktop ~/.local/share/applications/
 cp /usr/share/applications/foot-server.desktop ~/.local/share/applications/ 2>/dev/null || true
