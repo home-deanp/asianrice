@@ -18,3 +18,11 @@ then cp -rf .config/* ~/.config/
 **make thunar complete:**
 sudo pacman -S gvfs gvfs-mtp gvfs-afc udisks2 thunar-volman tumbler ffmpegthumbnailer poppler-glib libgsf webp-pixbuf-loader thunar-archive-plugin thunar-media-tags-plugin catfish file-roller polkit-gnome
 nwg-look  (to change thunar to dark mode)
+
+**hide foot server and foot client keeping only foot**
+mkdir -p ~/.local/share/applications
+cp /usr/share/applications/footclient.desktop ~/.local/share/applications/
+cp /usr/share/applications/foot-server.desktop ~/.local/share/applications/ 2>/dev/null || true
+
+echo "NoDisplay=true" >> ~/.local/share/applications/footclient.desktop
+echo "NoDisplay=true" >> ~/.local/share/applications/foot-server.desktop 2>/dev/null || true
