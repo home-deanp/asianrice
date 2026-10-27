@@ -12,7 +12,7 @@
 # Everything stays black; only the accent colour (your old #3B5283 blue) changes.
 # Wallpapers that are mostly black/white/grey get a white accent.
 # Recoloured: rofi, mako, waybar (incl. the arch logo), swaylock, mango border, screenshot picker,
-# Discord (Vesktop), kitty and fastfetch.
+# Discord (Vesktop), kitty, foot and fastfetch.
 
 CFG="${XDG_CONFIG_HOME:-$HOME/.config}"
 STATE="${XDG_CACHE_HOME:-$HOME/.cache}/theme"
@@ -21,6 +21,7 @@ MANGO_CONF="$CFG/mango/config.conf"
 KITTY_DIR="$CFG/kitty"
 KITTY_ANSI_SLOTS="4 6"     # kitty ANSI colours that become the accent (4 = blue, 6 = cyan; fastfetch's arch logo is cyan)
 WAYBAR_CSS="$CFG/waybar/style.css"
+FOOT_INI="$CFG/foot/foot.ini"
 
 # Discord custom CSS (Vesktop / Vencord). The whole colour scheme follows the wallpaper hue:
 # backgrounds, text greys, hover/active tints and the blue accent ramp.
@@ -285,6 +286,7 @@ apply_accent() {
     fi
 
     kitty_recolor "$new"
+    foot_recolor "$new"
 
     echo "$new" > "$STATE/accent"
 }
@@ -298,6 +300,80 @@ reload_all() {
     fi
     pgrep -x kitty >/dev/null 2>&1 && pkill -USR1 -x kitty          # kitty reloads its config
     # rofi, swaylock and the screenshot picker read their colours each time they open
+}
+
+# ---- foot -------------------------------------------------------------------------
+# Rewrites the accent lines in ~/.config/foot/foot.ini (new terminals pick them up) and sends the same colours to
+# the foot windows that are already open, so nothing needs restarting. Same colours as kitty above.
+foot_recolor() {   # $1 = accent hex (no #)
+    [ -f "$FOOT_INI" ] || return 0
+    python3 -I - "$1" "$FOOT_INI" "$KITTY_ANSI_SLOTS" <<'PY'
+import colorsys, glob, os, re, sys
+
+acc, ini, slots = sys.argv[1], sys.argv[2], sys.argv[3].split()
+r, g, b = (int(acc[i:i + 2], 16) / 255 for i in (0, 2, 4))
+h, l, s = colorsys.rgb_to_hls(r, g, b)
+
+def hexof(l2):
+    rr, gg, bb = colorsys.hls_to_rgb(h, min(max(l2, 0), 1), s)
+    return "%02x%02x%02x" % (round(rr * 255), round(gg * 255), round(bb * 255))
+
+base, bright = acc.lower(), hexof(l + 0.12)
+fg = "000000" if (0.299 * r + 0.587 * g + 0.114 * b) > 0.55 else "ffffff"
+keys = {"selection-background": base, "selection-foreground": fg, "cursor": "%s %s" % (fg, base), "urls": base}
+for n in slots:
+    n = int(n)
+    keys["regular%d" % n] = base
+    keys["bright%d" % n] = bright
+
+lines = open(ini, encoding="utf-8").read().split("\n")
+# foot 1.25+ calls the section [colors-dark] and ignores the old name [colors]; older foot only knows [colors]
+import subprocess
+try:
+    ver = re.search(r"(\d+)\.(\d+)", subprocess.run(["foot", "--version"], capture_output=True, text=True).stdout)
+    new_foot = (int(ver.group(1)), int(ver.group(2))) >= (1, 25) if ver else True
+except OSError:
+    new_foot = True
+sec = "colors-dark" if new_foot else "colors"
+old_sec = "colors" if new_foot else "colors-dark"
+for i, x in enumerate(lines):                       # move an old-style section header to the right name
+    if x.strip() == "[%s]" % old_sec and not any(y.strip() == "[%s]" % sec for y in lines):
+        lines[i] = "[%s]" % sec
+start = next((i for i, x in enumerate(lines) if x.strip() == "[%s]" % sec), None)
+if start is None:
+    lines += ["", "[%s]" % sec]
+    start = len(lines) - 1
+end = next((i for i in range(start + 1, len(lines)) if lines[i].lstrip().startswith("[")), len(lines))
+body = lines[start + 1:end]
+trail = 0
+while body and not body[-1].strip():
+    body.pop(); trail += 1
+for k, v in keys.items():
+    pat = re.compile(r"^\s*%s\s*=" % re.escape(k))          # active lines only; commented-out ones are left alone
+    hits = [i for i, x in enumerate(body) if pat.match(x)]
+    for i in hits:
+        body[i] = "%s=%s" % (k, v)
+    if not hits:
+        body.append("%s=%s" % (k, v))
+body += [""] * trail
+lines[start + 1:end] = body
+out = "\n".join(lines)
+if not out.endswith("\n"):
+    out += "\n"
+open(ini, "w", encoding="utf-8").write(out)
+
+# live update: the same colours as terminal escape codes, sent to every open terminal of yours
+seq = "".join("\033]4;%d;#%s\033\\" % (int(n) + off, c) for n in slots for off, c in ((0, base), (8, bright)))
+seq += "\033]12;#%s\033\\\033]17;#%s\033\\\033]19;#%s\033\\" % (base, base, fg)
+for pts in glob.glob(os.environ.get("FOOT_PTS_GLOB", "/dev/pts/[0-9]*")):
+    try:
+        if os.stat(pts).st_uid == os.getuid():
+            fd = os.open(pts, os.O_WRONLY | os.O_NONBLOCK | os.O_NOCTTY)
+            os.write(fd, seq.encode())
+            os.close(fd)
+    except OSError:
+        pass
+PY
 }
 
 # ---- repair -----------------------------------------------------------------------
