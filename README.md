@@ -6,7 +6,7 @@ chmod +x ~/.config/mango/*.sh ~/.config/rofi/*.sh ~/.config/waybar/scripts/*
 
 **pacman:**
 
-waybar awww mako swayidle swaylock foot fish thunar btop rofi wireplumber pavucontrol wl-clipboard wl-clip-persist cliphist noto-fonts-emoji ttf-jetbrains-mono-nerd xdg-desktop-portal-wlr grim slurp swappy python-pillow imagemagick wlopm xorg-xhost 
+waybar awww mako swayidle swaylock foot fish thunar nvim btop rofi wireplumber pavucontrol wl-clipboard wl-clip-persist cliphist noto-fonts-emoji ttf-jetbrains-mono-nerd xdg-desktop-portal-wlr grim slurp swappy swayimg python-pillow imagemagick wlopm xorg-xhost 
 
 **aur:**
 
