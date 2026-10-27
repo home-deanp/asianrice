@@ -362,10 +362,31 @@ if not out.endswith("\n"):
     out += "\n"
 open(ini, "w", encoding="utf-8").write(out)
 
-# live update: the same colours as terminal escape codes, sent to every open terminal of yours
+# live update: the same colours as terminal escape codes, sent only to foot's own terminals
 seq = "".join("\033]4;%d;#%s\033\\" % (int(n) + off, c) for n in slots for off, c in ((0, base), (8, bright)))
 seq += "\033]12;#%s\033\\\033]17;#%s\033\\\033]19;#%s\033\\" % (base, base, fg)
-for pts in glob.glob(os.environ.get("FOOT_PTS_GLOB", "/dev/pts/[0-9]*")):
+def foot_ttys():
+    """Only the terminals that belong to a running foot: the pty of each shell that foot started."""
+    ttys = set()
+    for p in os.listdir("/proc"):
+        if not p.isdigit():
+            continue
+        try:
+            if open("/proc/%s/comm" % p).read().strip() not in ("foot", "footclient"):
+                continue
+            kids = set()
+            for t in os.listdir("/proc/%s/task" % p):
+                kids.update(open("/proc/%s/task/%s/children" % (p, t)).read().split())
+            for k in kids:
+                tty = os.readlink("/proc/%s/fd/0" % k)
+                if tty.startswith("/dev/pts/"):
+                    ttys.add(tty)
+        except OSError:
+            continue
+    return sorted(ttys)
+
+targets = glob.glob(os.environ["FOOT_PTS_GLOB"]) if os.environ.get("FOOT_PTS_GLOB") else foot_ttys()   # env var: for testing
+for pts in targets:
     try:
         if os.stat(pts).st_uid == os.getuid():
             fd = os.open(pts, os.O_WRONLY | os.O_NONBLOCK | os.O_NOCTTY)
