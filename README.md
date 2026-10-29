@@ -6,7 +6,7 @@ chmod +x ~/.config/mango/*.sh ~/.config/rofi/*.sh ~/.config/waybar/scripts/*
 
 **pacman:**
 
-waybar awww mako swayidle swaylock foot fish thunar nvim btop rofi wireplumber pavucontrol wl-clipboard wl-clip-persist cliphist noto-fonts-emoji ttf-jetbrains-mono-nerd xdg-desktop-portal-wlr grim slurp swappy swayimg python-pillow imagemagick wlopm xorg-xhost  lxappearance
+waybar awww mako swayidle swaylock foot fish thunar nvim btop rofi wireplumber pavucontrol wl-clipboard wl-clip-persist cliphist noto-fonts-emoji ttf-jetbrains-mono-nerd xdg-desktop-portal-wlr grim slurp swappy swayimg python-pillow imagemagick wlopm xorg-xhost nwg-look
 
 **aur:**
 
@@ -17,7 +17,6 @@ then cp -rf .config/* ~/.config/
 
 **make thunar complete:**
 sudo pacman -S gvfs gvfs-mtp gvfs-afc udisks2 thunar-volman tumbler ffmpegthumbnailer poppler-glib libgsf webp-pixbuf-loader thunar-archive-plugin thunar-media-tags-plugin catfish file-roller polkit-gnome
-nwg-look  (to change thunar to dark mode)
 
 **hide foot server and foot client keeping only foot**
 
