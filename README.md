@@ -43,7 +43,7 @@ For full file manager functionality including thumbnails, archiving, and automat
 
 ---
 
-## 5. Optional System & Gaming Apps
+## 5. Optional for complete system
 
 Install these extra applications as needed:
 
@@ -58,7 +58,7 @@ Install these extra applications as needed:
 
 ## 6. Clean Up Application Menu Launchers
 
-Hide extra `footclient` and `foot-server` desktop entries to keep only the main `foot` terminal visible in your launcher:
+Hide extra `footclient` and `foot-server` desktop entries for a clean launcher:
 
 1. Create local applications directory:
 `mkdir -p ~/.local/share/applications`
