@@ -25,7 +25,7 @@ Command to run:
 
 ---
 
-## 3. Dotfiles Deployment
+## 3. Dotfiles
 
 After installing the packages above:
 
@@ -35,9 +35,9 @@ After installing the packages above:
 
 ---
 
-## 4. Complete Thunar Setup
+## 4. Complete Thunar
 
-For full file manager functionality including thumbnails, archiving, and automatic volume mounting:
+For full file manager
 
 `sudo pacman -S gvfs gvfs-mtp gvfs-afc udisks2 thunar-volman tumbler ffmpegthumbnailer poppler-glib libgsf webp-pixbuf-loader thunar-archive-plugin thunar-media-tags-plugin catfish file-roller polkit-gnome`
 
@@ -45,14 +45,14 @@ For full file manager functionality including thumbnails, archiving, and automat
 
 ## 5. Optional for complete system
 
-Install these extra applications as needed:
+Install extra applications if needed:
 
 * **Pacman:**
 `sudo pacman -S partitionmanager qalculate-qt steam qbittorrent prismlauncher obsidian obs-studio flatpak heroic krita supertux supertuxkart guvcview onlyoffice`
 * **AUR:**
 `yay -S vesktop-bin protonup-qt helium-browser-bin zen-browser-bin spotifast heroic-games-launcher-bin localsend-bin octopi photogimp rustdesk-bin`
 * **Flatpak:**
-`flatpak install sober` *(requires flatpak to be installed first)*
+`flatpak install sober` *(needs flatpak to be installed first)*
 
 ---
 
@@ -60,11 +60,8 @@ Install these extra applications as needed:
 
 Hide extra `footclient` and `foot-server` desktop entries for a clean launcher:
 
-1. Create local applications directory:
-`mkdir -p ~/.local/share/applications`
-2. Copy desktop files:
-`cp /usr/share/applications/footclient.desktop ~/.local/share/applications/`
-`cp /usr/share/applications/foot-server.desktop ~/.local/share/applications/ 2>/dev/null || true`
-3. Hide launchers:
-`echo "NoDisplay=true" >> ~/.local/share/applications/footclient.desktop`
-`echo "NoDisplay=true" >> ~/.local/share/applications/foot-server.desktop 2>/dev/null || true`
+`mkdir -p ~/.local/share/applications
+cp /usr/share/applications/footclient.desktop ~/.local/share/applications/
+cp /usr/share/applications/foot-server.desktop ~/.local/share/applications/ 2>/dev/null || true
+echo "NoDisplay=true" >> ~/.local/share/applications/footclient.desktop
+echo "NoDisplay=true" >> ~/.local/share/applications/foot-server.desktop 2>/dev/null || true"`
