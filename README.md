@@ -6,7 +6,7 @@ chmod +x ~/.config/mango/*.sh ~/.config/rofi/*.sh ~/.config/waybar/scripts/*
 
 **pacman:**
 
-waybar awww mako swayidle swaylock foot fish thunar nvim btop rofi wireplumber pavucontrol wl-clipboard wl-clip-persist cliphist noto-fonts-emoji ttf-jetbrains-mono-nerd xdg-desktop-portal-wlr grim slurp swappy swayimg python-pillow imagemagick wlopm xorg-xhost nwg-look
+waybar awww mako swayidle swaylock foot fish thunar yazi nvim btop mission-center rofi wireplumber pavucontrol wl-clipboard wl-clip-persist cliphist noto-fonts-emoji ttf-jetbrains-mono-nerd xdg-desktop-portal-wlr grim slurp swappy swayimg mpv python-pillow imagemagick wlopm xorg-xhost nwg-look
 
 **aur:**
 
@@ -17,6 +17,13 @@ then cp -rf .config/* ~/.config/
 
 **make thunar complete:**
 sudo pacman -S gvfs gvfs-mtp gvfs-afc udisks2 thunar-volman tumbler ffmpegthumbnailer poppler-glib libgsf webp-pixbuf-loader thunar-archive-plugin thunar-media-tags-plugin catfish file-roller polkit-gnome
+
+**optional installs if computer ever restarts:**
+sudo pacman -S partitionmanager qalculate-qt steam qbittorrent prismlauncher obsidian obs-studio flatpak heroic krita supertux supertuxkart guvcview
+
+yay -S vesktop-bin protonup-qt helium-browser-bin zen-browser-bin spotifast heroic-games-launcher-bin localsend-bin octopi photogimp
+
+flatpak install sober (when installed flatpak)
 
 **hide foot server and foot client keeping only foot**
 
