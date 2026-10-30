@@ -4,16 +4,7 @@ This readme documents all required packages and configurations to set up my setu
 
 ---
 
-## 1. Script Permissions
-
-Make sure all script files (.sh, .py) in your config directories are executable so Waybar, Rofi clipboard, calculator, and emoji pickers work.
-
-Command to run:
-`chmod +x ~/.config/mango/*.sh ~/.config/rofi/*.sh ~/.config/waybar/scripts/*`
-
----
-
-## 2. Core Package Installations
+## 1. Package Installations
 
 ### Pacman Packages
 
@@ -25,17 +16,18 @@ Command to run:
 
 ---
 
-## 3. Dotfiles
+## 2. Dotfiles
 
 After installing the packages above:
 
 1. Git clone this repository.
 2. Copy the configs over:
 `cp -rf .config/* ~/.config/`
-
+3. Make sure all script files (.sh, .py) in your config directories are executable so Waybar, Rofi clipboard, calculator, and emoji pickers work.
+`chmod +x ~/.config/mango/*.sh ~/.config/rofi/*.sh ~/.config/waybar/scripts/*`
 ---
 
-## 4. Complete Thunar
+## 3. Complete Thunar
 
 For full file manager
 
@@ -43,7 +35,7 @@ For full file manager
 
 ---
 
-## 5. Optional for complete system
+## 4. Optional for complete system
 
 Install extra applications if needed:
 
@@ -56,7 +48,7 @@ Install extra applications if needed:
 
 ---
 
-## 6. Clean Up Application Menu Launchers
+## 5. Clean up Rofi
 
 Hide extra `footclient` and `foot-server` desktop entries for a clean launcher:
 
