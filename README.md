@@ -40,9 +40,9 @@ For full file manager
 Install extra applications if needed:
 
 * **Pacman:**
-`sudo pacman -S partitionmanager qalculate-qt steam qbittorrent prismlauncher obsidian obs-studio flatpak heroic krita supertux supertuxkart guvcview onlyoffice`
+`sudo pacman -S partitionmanager qalculate-qt steam qbittorrent prismlauncher obsidian obs-studio flatpak krita supertux supertuxkart guvcview `
 * **AUR:**
-`yay -S vesktop-bin protonup-qt helium-browser-bin zen-browser-bin spotifast heroic-games-launcher-bin localsend-bin octopi photogimp rustdesk-bin`
+`yay -S vesktop-bin protonup-qt helium-browser-bin zen-browser-bin spotifast heroic-games-launcher-bin localsend-bin octopi photogimp rustdesk-bin onlyoffice-bin`
 * **Flatpak:**
 `flatpak install sober` *(needs flatpak to be installed first)*
 
