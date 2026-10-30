@@ -60,10 +60,14 @@ Install extra applications if needed:
 
 Hide extra `footclient` and `foot-server` desktop entries for a clean launcher:
 
+
 mkdir -p ~/.local/share/applications
 
 cp /usr/share/applications/footclient.desktop ~/.local/share/applications/
+
 cp /usr/share/applications/foot-server.desktop ~/.local/share/applications/ 2>/dev/null || true
 
+
 echo "NoDisplay=true" >> ~/.local/share/applications/footclient.desktop
-echo "NoDisplay=true" >> ~/.local/share/applications/foot-server.desktop 2>/dev/null || true"
+
+echo "NoDisplay=true" >> ~/.local/share/applications/foot-server.desktop 2>/dev/null || true 
