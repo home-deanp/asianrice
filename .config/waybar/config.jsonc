@@ -88,9 +88,9 @@
   },
 
   "network": {
-    "format-wifi": "\uf1eb {essid}",
-    "format-ethernet": "\uf0ac wired",
-    "format-disconnected": "\uf071 offline",
+    "format-wifi": "\uf1eb",
+    "format-ethernet": "\uf0ac",
+    "format-disconnected": "\uf071",
     "tooltip-format-wifi": "{essid} ({signalStrength}%)\n{ipaddr}",
     "tooltip-format-ethernet": "{ifname}\n{ipaddr}",
     "interval": 5,
@@ -123,7 +123,9 @@
     "exec": "~/.config/waybar/scripts/battery.py",
     "return-type": "json",
     "interval": 30,
-    "tooltip": true
+    "signal": 10,
+    "tooltip": true,
+    "on-click": "pgrep -x rofi && pkill -x rofi || ~/.config/waybar/scripts/power-profile.sh"
   },
 
   "pulseaudio": {
