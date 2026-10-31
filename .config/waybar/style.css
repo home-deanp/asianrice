@@ -92,11 +92,11 @@ window#waybar {
 
 #network      { 
    color: #89dceb; 
-   font-size: 16px;
+   font-size: 14px;
 }
 #network.disconnected { 
   color: #f38ba8; 
-  font-size: 16px;
+  font-size: 14px;
 }
 #pulseaudio   { 
   color: #fab387; 
