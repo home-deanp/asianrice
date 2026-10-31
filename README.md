@@ -12,7 +12,7 @@ This readme documents all required packages and configurations to set up my setu
 
 ### AUR Packages
 
-`yay -S nvibrant wl-gammarelay-rs xfce-polkit wayfreeze-git`
+`yay -S nvibrant-bin wl-gammarelay-rs xfce-polkit wayfreeze-git`
 
 ---
 
@@ -42,7 +42,7 @@ Install extra applications if needed:
 * **Pacman:**
 `sudo pacman -S partitionmanager qalculate-qt steam qbittorrent prismlauncher obsidian obs-studio flatpak krita supertux supertuxkart guvcview `
 * **AUR:**
-`yay -S vesktop-bin protonup-qt helium-browser-bin zen-browser-bin spotifast heroic-games-launcher-bin localsend-bin octopi photogimp rustdesk-bin onlyoffice-bin yacreader`
+`yay -S vesktop-bin protonup-qt helium-browser-bin zen-browser-bin spotifast-bin heroic-games-launcher-bin localsend-bin octopi photogimp rustdesk-bin onlyoffice-bin yacreader`
 * **Flatpak:**
 `flatpak install sober` *(needs flatpak to be installed first)*
 
