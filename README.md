@@ -8,7 +8,7 @@ This readme documents all required packages and configurations to set up my setu
 
 ### Pacman Packages
 
-`sudo pacman -S fastfetch waybar awww mako swayidle swaylock foot fish thunar yazi nvim btop mission-center rofi wireplumber pavucontrol wl-clipboard wl-clip-persist cliphist noto-fonts-emoji ttf-jetbrains-mono-nerd xdg-desktop-portal-wlr grim slurp swappy swayimg mpv python-pillow imagemagick wlopm xorg-xhost nwg-look nm-connection-editor`
+`sudo pacman -S fastfetch waybar awww mako swayidle swaylock foot fish thunar yazi nvim btop mission-center rofi wireplumber pavucontrol wl-clipboard wl-clip-persist cliphist noto-fonts-emoji ttf-jetbrains-mono-nerd xdg-desktop-portal-wlr grim slurp swappy swayimg mpv python-pillow imagemagick wlopm xorg-xhost nwg-look network-manager-applet`
 
 ### AUR Packages
 
