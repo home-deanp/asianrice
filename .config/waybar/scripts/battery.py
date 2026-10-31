@@ -11,6 +11,7 @@ import glob
 import json
 import os
 import subprocess
+import re
 import sys
 
 SYS = os.environ.get("POWER_SUPPLY_DIR", "/sys/class/power_supply")
@@ -31,6 +32,28 @@ def read(path):
         return ""
 
 
+def fmt_time(seconds):
+    m = int(seconds // 60)
+    return "%dh %02dm" % (m // 60, m % 60) if m >= 60 else "%dm" % m
+
+
+def sysfs_eta(d, status):
+    """Seconds left (discharging) or until full (charging), worked out from numbers the kernel already exposes."""
+    def num(n):
+        v = read(d + "/" + n)
+        return int(v) if v.isdigit() else 0
+    full = num("energy_full") or num("charge_full")
+    now = num("energy_now") or num("charge_now")
+    rate = num("power_now") or num("current_now")
+    if not (full and rate):
+        return None
+    if status == "Discharging":
+        return now / rate * 3600
+    if status == "Charging":
+        return max(full - now, 0) / rate * 3600
+    return None
+
+
 def devices():
     found = []
     for d in sorted(glob.glob(SYS + "/*")):
@@ -47,6 +70,7 @@ def devices():
             "status": read(d + "/status") or "Unknown",
             "system": read(d + "/scope").lower() != "device",
             "label": model or name,
+            "eta": sysfs_eta(d, read(d + "/status") or "Unknown"),
         })
     found.sort(key=lambda x: (not x["system"], x["id"]))      # laptop first, then gadgets
     return found
@@ -79,6 +103,10 @@ def upower_devices(skip_ids):
         native = os.path.basename(info.get("native-path", ""))
         if native in skip_ids or info.get("power supply", "no") == "yes":
             continue                                        # already listed from /sys (e.g. the laptop battery)
+        eta = None
+        m = re.search(r"time to (?:empty|full):\s*([\d.,]+)\s*(second|minute|hour|day)", out)
+        if m:
+            eta = float(m.group(1).replace(",", ".")) * {"second": 1, "minute": 60, "hour": 3600, "day": 86400}[m.group(2)]
         state = {"fully-charged": "Full", "pending-charge": "Charging"}.get(info.get("state", ""), info.get("state", "unknown").capitalize())
         found.append({
             "id": native or path,
@@ -87,6 +115,7 @@ def upower_devices(skip_ids):
             "system": False,
             "label": info.get("model") or info.get("vendor") or section or "Wireless device",
             "type": section,
+            "eta": eta,
         })
     return found
 
@@ -163,7 +192,17 @@ def main():
         text = "%s %d%%" % (icon(d), d["pct"])
         parts.append(text if lv == "ok" else "<span foreground='%s'>%s</span>" % (COLOURS[lv], text))
         who = "Laptop" if d["system"] else d["label"]
-        tips.append("%s: %d%% (%s)" % (who, d["pct"], d["status"].lower()))
+        line = "%s: %d%% (%s)" % (who, d["pct"], d["status"].lower())
+        if d.get("eta"):
+            line += "  ·  %s %s" % (fmt_time(d["eta"]), "until full" if d["status"] == "Charging" else "left")
+        tips.append(line)
+    try:
+        prof = subprocess.run(["powerprofilesctl", "get"], capture_output=True, text=True, timeout=2).stdout.strip()
+        if prof:
+            tips.append("")
+            tips.append("Power profile: %s  (click to change)" % prof.replace("-", " ").capitalize())
+    except (OSError, subprocess.SubprocessError):
+        pass
     worst = "crit" if any(level(d) == "crit" for d in devs) else "low" if any(level(d) == "low" for d in devs) else "ok"
     print(json.dumps({"text": "  ".join(parts), "tooltip": "\n".join(tips), "class": worst}, ensure_ascii=False))
 
