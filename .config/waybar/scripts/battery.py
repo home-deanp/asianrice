@@ -76,6 +76,15 @@ def devices():
     return found
 
 
+def type_from_path(path):
+    """UPower names its devices after their type, e.g. .../devices/mouse_dev_E7_F7_..., so that tells us too."""
+    base = os.path.basename(path)
+    for t in TYPE_ICONS:
+        if base.startswith(t.replace("-", "_") + "_"):
+            return t
+    return ""
+
+
 def upower_devices(skip_ids):
     """Wireless mouse / keyboard / headset batteries from UPower (bluetooth and friends)."""
     try:
@@ -114,36 +123,48 @@ def upower_devices(skip_ids):
             "status": state,
             "system": False,
             "label": info.get("model") or info.get("vendor") or section or "Wireless device",
-            "type": section,
+            "type": section if section in TYPE_ICONS else type_from_path(path) or section,
             "eta": eta,
         })
     return found
 
 
+# UPower device type -> icon. Types not listed here (or unknown devices) just get the normal battery-level icon.
+TYPE_ICONS = {
+    "mouse": 0xF037D, "touchpad": 0xF037D,
+    "keyboard": 0xF030C,
+    "headset": 0xF02CB, "headphones": 0xF02CB, "other-audio": 0xF02CB,
+    "speakers": 0xF04C3,
+    "phone": 0xF011C, "pda": 0xF011C,
+    "tablet": 0xF04F7,
+    "gaming-input": 0xF0297,
+}
+NAME_HINTS = (          # for devices whose type isn't known: guess from the name
+    (("iphone", "phone", "pixel", "galaxy"), "phone"),
+    (("ipad", "tablet"), "tablet"),
+    (("keyboard", "kbd"), "keyboard"),
+    (("head", "buds", "airpods"), "headset"),
+    (("mouse", "mx master", "g502", "razer"), "mouse"),
+)
+
+
 def kind(dev):
-    t = dev.get("type", "")
-    if t in ("keyboard", "mouse"):
-        return t
-    if t in ("headset", "headphones", "speakers"):
-        return "headset"
     if dev["system"]:
         return "battery"
+    t = dev.get("type", "")
+    if t in TYPE_ICONS:
+        return t
     text = (dev["label"] + " " + dev["id"]).lower()
-    if any(k in text for k in ("keyboard", "kbd", "keys")):
-        return "keyboard"
-    if any(k in text for k in ("head", "buds", "airpods", "audio")):
-        return "headset"
-    return "mouse"                                            # most gadgets that report a battery
+    for words, k in NAME_HINTS:
+        if any(w in text for w in words):
+            return k
+    return "battery"
 
 
 def icon(dev):
     k = kind(dev)
-    if k == "keyboard":
-        return chr(KEYBOARD)
-    if k == "headset":
-        return chr(HEADSET)
-    if k == "mouse":
-        return chr(MOUSE)
+    if k in TYPE_ICONS:
+        return chr(TYPE_ICONS[k])
     if dev["status"] == "Charging":
         return chr(CHARGING)
     return chr(LEVELS[dev["pct"] // 10])
