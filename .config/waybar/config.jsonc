@@ -94,11 +94,11 @@
     "tooltip-format-wifi": "{essid} ({signalStrength}%)\n{ipaddr}",
     "tooltip-format-ethernet": "{ifname}\n{ipaddr}",
     "interval": 5,
-    "on-click": "foot -e nmtui"
+    "on-click": "nm-connection-editor"
 },
 
 "custom/brightness": {
-  "exec": "DBUS_SESSION_BUS_ADDRESS=unix:path=/run/user/$(id -u)/bus busctl --user get-property rs.wl-gammarelay / rs.wl.gammarelay Brightness | awk '{print int($2*100+0.5)}'",
+    "exec": "~/.config/waybar/scripts/brightness.sh get",
   "format": "\udb81\udda8 {}%",
   "interval": 2,
   "signal": 9,
