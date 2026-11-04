@@ -94,7 +94,7 @@
     "tooltip-format-wifi": "{essid} ({signalStrength}%)\n{ipaddr}",
     "tooltip-format-ethernet": "{ifname}\n{ipaddr}",
     "interval": 5,
-    "on-click": "nm-connection-editor"
+    "on-click": "foot -e nmtui"
 },
 
 "custom/brightness": {
