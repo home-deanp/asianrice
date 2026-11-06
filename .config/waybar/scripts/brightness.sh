@@ -35,7 +35,7 @@ change() {   # $1 = + or -
             if [ "$1" = + ]; then new=$(( cur + STEP )); [ "$new" -gt 100 ] && new=100
             else                  new=$(( cur - STEP )); [ "$new" -lt "$MIN" ] && new=$MIN; fi
             brightnessctl -q set "${new}%" ;;
-        gamma) busctl --user call rs.wl-gammarelay / rs.wl.gammarelay UpdateBrightness d "${1}0.0${STEP}" >/dev/null 2>&1 ;;
+        gamma) busctl --user -- call rs.wl-gammarelay / rs.wl.gammarelay UpdateBrightness d "${1}0.0${STEP}" >/dev/null 2>&1 ;;   # "--" so busctl does not read -0.05 as an option
     esac
     pkill -RTMIN+9 waybar 2>/dev/null     # refresh the bar's number right away
 }
