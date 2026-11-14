@@ -45,7 +45,9 @@ Install extra applications if needed:
 `yay -S vesktop-bin protonup-qt helium-browser-bin zen-browser-bin spotifast-bin heroic-games-launcher-bin localsend-bin octopi photogimp rustdesk-bin onlyoffice-bin yacreader`
 * **Flatpak:**
 `flatpak install sober` *(needs flatpak to be installed first)*
-
+* **Bluetooth:**
+`sudo pacman -S bluez bluez-utils bluetui`
+`sudo systemctl enable --now bluetooth.service`
 ---
 
 ## 5. Clean up Rofi
